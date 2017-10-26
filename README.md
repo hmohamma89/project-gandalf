@@ -1,2 +1,2 @@
 # git-hooks-tests
-as
+asd
