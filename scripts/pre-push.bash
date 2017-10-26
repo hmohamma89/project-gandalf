@@ -12,10 +12,11 @@ fi
 current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
 if [[ $current_branch = $protected_branch ]]; then
+	echo "Runing unit tests"
     $CMD
     RESULT=$?
     if [ $RESULT -ne 0 ]; then 
-        echo "failed $CMD"
+        echo "unit tests failed please fix them before you git push"
         exit 1
     fi
 fi
