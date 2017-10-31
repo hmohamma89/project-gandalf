@@ -1,6 +1,7 @@
 #!/bin/bash 
 
-CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File run-tests.ps1" # Command that runs your tests
+CMD= "powershell.exe -executionPolicy bypass -noexit -file .git\hooks\run-tests.ps1" # Command that runs your tests
+
 protected_branch='master'
 
 # Check if we actually have commits to push

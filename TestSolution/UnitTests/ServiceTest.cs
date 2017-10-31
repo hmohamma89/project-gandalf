@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTests
 {
+    [TestCategory("githook")]
     [TestClass]
     public class ServiceTest
     {
@@ -14,6 +15,7 @@ namespace UnitTests
             _service = new Service();
         }
         [TestMethod]
+        [TestCategory("githook")]
         public void ShouldReturnTrue()
         {
             //Arrange
