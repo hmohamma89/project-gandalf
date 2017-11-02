@@ -85,7 +85,6 @@ $failedTests | % { Write-Host Failed test: $_.testName
 Write-Host
 
 
-
 }
 
 function ProcessFileChange()
