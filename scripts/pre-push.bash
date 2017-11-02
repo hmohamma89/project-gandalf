@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\run-tests.ps1" # Command that runs your tests
+CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1" # Command that runs your tests
 protected_branch='master'
 echo $PWD
 # Check if we actually have commits to push

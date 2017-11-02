@@ -16,6 +16,7 @@ $testsFiles = @();
 [string[]] $unitTestsFiles=@();
 
 [string[]] $testFilesToExclude = @("Unit2Tests");
+[string] $solutionPath="D:\git-hooks-tests";
 $testCategory= "githooks";
 $resultsFile = 'testresults.txt';
 [string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe";
@@ -24,7 +25,8 @@ $resultsFile = 'testresults.txt';
 
 function GetTestsDlls()
 {
-     $global:testsFiles=(get-item (get-location)).parent.fullname |  Get-ChildItem -Filter *Tests.dll -recurse | ? {$_.fullname -match "bin"};  
+    #  $global:testsFiles=(get-item (get-location)).parent.fullname |  Get-ChildItem -Filter *Tests.dll -recurse | ? {$_.fullname -match "bin"};
+     $global:testsFiles= $solutionPath |  Get-ChildItem -Filter *Tests.dll -recurse | ? {$_.fullname -match "bin"};  
      foreach ($testsFile in $global:testsFiles) {
          $x=$testsFile.FullName;
          $tempString="testcontainer:'$x'";
