@@ -19,7 +19,7 @@ $testsFiles = @();
 $testCategory= "githooks";
 $resultsFile = 'testresults.txt';
 [string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe";
-
+[string] $outCome= "";
 #echo asdla
 
 function GetTestsDlls()
@@ -65,6 +65,7 @@ $results = [xml](GC $resultsFile)
 $outcome = $results.TestRun.ResultSummary.outcome
 $fgColor = if($outcome -eq "Failed") { "Red" } else { "Green" }
 
+$global:outCome = $outcome;
 $total = $results.TestRun.ResultSummary.Counters.total
 $passed = $results.TestRun.ResultSummary.Counters.passed
 $failed = $results.TestRun.ResultSummary.Counters.failed
@@ -82,6 +83,9 @@ $failedTests | % { Write-Host Failed test: $_.testName
   Write-Host $_.Output.ErrorInfo.StackTrace }
 
 Write-Host
+
+
+
 }
 
 function ProcessFileChange()
@@ -92,16 +96,26 @@ function ProcessFileChange()
         ExcludeNonUnitTests
         RunTests
         ParseTestResults    
+
     }
     catch
     {
         write-host Caught an exception: -ForegroundColor Red
         write-host Exception Type: $($_.Exception.GetType().FullName) -ForegroundColor Red
         write-host Exception Message: $($_.Exception.Message) -ForegroundColor Red
+        exit 1
     }
     finally
     {
         write-host Finally block reached
+        if($Global:outCome -eq "Failed"){
+            write-host exit1
+            exit 1
+        }
+        else {
+            write-host exit0
+            exit 0
+        }
     }
 }
 
