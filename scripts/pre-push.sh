@@ -1,9 +1,9 @@
 #!/bin/bash 
 
-CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File d://git-hooks-tests//scripts//run-tests.ps1" # Command that runs your tests
+CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1" # Command that runs your tests
 
-echo $CMD 
-echo $PWD
+echo "test script = $CMD" 
+echo "current directory : $PWD"
 
 protected_branch='master'
 # Check if we actually have commits to push
@@ -18,6 +18,7 @@ if [[ $current_branch = $protected_branch ]]; then
 	echo "Runing unit tests"
     $CMD
     RESULT=$?
+    echo  "the result is: $RESULT"
     if [ $RESULT -ne 0 ]; then 
         echo "unit tests failed please fix them before you git push"
         exit 1
