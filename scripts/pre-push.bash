@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File d:/git-hooks-tests/scripts/run-tests.ps1" # Command that runs your tests
+CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File d://git-hooks-tests//scripts//run-tests.ps1" # Command that runs your tests
 
 echo $CMD 
 echo $PWD
