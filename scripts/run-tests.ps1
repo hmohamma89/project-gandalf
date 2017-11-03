@@ -4,30 +4,28 @@
     .DESCRIPTION
         Run all tests for a project
     #>
-
-    # Param([Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
-    #      ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe" 
-    #      ,[Parameter(Mandatory = $true)][string] $resultsFile # name of result file to save test results to
-    # )
+    Param(
+          [Parameter(Mandatory = $true)][string] $solutionPath # name of result file to save test results to
+         ,[Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
+         ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe" 
+    )
 
 cls
 $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $testsFiles = @();
 [string[]] $unitTestsFiles=@();
 
-[string[]] $testFilesToExclude = @("Unit2Tests");
-[string] $solutionPath="D:\git-hooks-tests";
-$testCategory= "githooks";
+# [string[]] $testFilesToExclude = @("Unit2Tests");
+# [string] $solutionPath="D:\git-hooks-tests";
 $resultsFile = 'testresults.txt';
-[string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe";
+# [string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe";
 [string] $outCome= "";
-#echo asdla
 
 function GetTestsDlls()
 {
-    #  $global:testsFiles=(get-item (get-location)).parent.fullname |  Get-ChildItem -Filter *Tests.dll -recurse | ? {$_.fullname -match "bin"};
      $global:testsFiles= $solutionPath |  Get-ChildItem -Filter *Tests.dll -recurse | ? {$_.fullname -match "bin"};  
-     foreach ($testsFile in $global:testsFiles) {
+     foreach ($testsFile in $global:testsFiles) 
+     {
          $x=$testsFile.FullName;
          $tempString="testcontainer:'$x'";
          $global:unitTestsFiles+=$tempString;
@@ -48,6 +46,7 @@ function ExcludeNonUnitTests()
 
 function RunTests()
 {
+    DeleteTestResultFileIfExist
     $temp='';
     $fs = New-Object -ComObject Scripting.FileSystemObject;
     $f = $fs.GetFile($mstest);
@@ -61,32 +60,35 @@ function RunTests()
     iex "& $cmd";
 }
 
+function DeleteTestResultFileIfExist () {
+    $resultsFilePath= $solutionPath |  Get-ChildItem -Filter $global:resultsFile -recurse;
+    if(Test-Path $resultsFilePath.FullName){
+        Remove-Item $resultsFilePath.FullName;
+    }
+}
 function ParseTestResults()
 {
-$results = [xml](GC $resultsFile)
-$outcome = $results.TestRun.ResultSummary.outcome
-$fgColor = if($outcome -eq "Failed") { "Red" } else { "Green" }
+    $results = [xml](GC $resultsFile)
+    $global:outCome = $results.TestRun.ResultSummary.outcome
+    $fgColor = if($outCome -eq "Failed") { "Red" } else { "Green" }
 
-$global:outCome = $outcome;
-$total = $results.TestRun.ResultSummary.Counters.total
-$passed = $results.TestRun.ResultSummary.Counters.passed
-$failed = $results.TestRun.ResultSummary.Counters.failed
+    $total = $results.TestRun.ResultSummary.Counters.total
+    $passed = $results.TestRun.ResultSummary.Counters.passed
+    $failed = $results.TestRun.ResultSummary.Counters.failed
 
-$failedTests = $results.TestRun.Results.UnitTestResult | Where-Object { $_.outcome -eq "Failed" }
+    $failedTests = $results.TestRun.Results.UnitTestResult | Where-Object { $_.outcome -eq "Failed" }
 
-Write-Host Test Results: $outcome -ForegroundColor $fgColor -BackgroundColor "Black"
-Write-Host Total tests: $total
-Write-Host Passed: $passed
-Write-Host Failed: $failed
-Write-Host
+    Write-Host Test Results: $outCome -ForegroundColor $fgColor -BackgroundColor "Black"
+    Write-Host Total tests: $total
+    Write-Host Passed: $passed
+    Write-Host Failed: $failed
+    Write-Host
 
-$failedTests | % { Write-Host Failed test: $_.testName
-  Write-Host $_.Output.ErrorInfo.Message
-  Write-Host $_.Output.ErrorInfo.StackTrace }
+    $failedTests | % { Write-Host Failed test: $_.testName
+    Write-Host $_.Output.ErrorInfo.Message
+    Write-Host $_.Output.ErrorInfo.StackTrace }
 
-Write-Host
-
-
+    Write-Host
 }
 
 function ProcessFileChange()
@@ -97,7 +99,6 @@ function ProcessFileChange()
         ExcludeNonUnitTests
         RunTests
         ParseTestResults    
-
     }
     catch
     {
@@ -119,6 +120,5 @@ function ProcessFileChange()
         }
     }
 }
-
 
 ProcessFileChange

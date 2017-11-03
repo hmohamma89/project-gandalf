@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<TestRun id="68170c89-4fca-4cf3-8564-ee82b4749648" name="hamdoon.mohammad@P1211GBG 2017-10-31 10:59:10" runUser="WIPCORE\hamdoon.mohammad" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <TestSettings name="Default Test Settings" id="64fcf7bd-1cea-4089-8844-dcacc7e4af1a">
-    <Deployment userDeploymentRoot="D:\git-hooks-tests\scripts" useDefaultDeploymentRoot="false" runDeploymentRoot="hamdoon.mohammad_P1211GBG 2017-10-31 10_59_10" />
+<TestRun id="a40cd78d-a952-41fa-93d2-0b7ba00916a6" name="hamdoon.mohammad@P1211GBG 2017-11-03 11:16:01" runUser="WIPCORE\hamdoon.mohammad" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="88a276b8-c90c-4202-946b-4a0e787b6616">
+    <Deployment userDeploymentRoot="D:\git-hooks-tests\scripts" useDefaultDeploymentRoot="false" runDeploymentRoot="hamdoon.mohammad_P1211GBG 2017-11-03 11_16_01" />
     <Execution>
       <TestTypeSpecific />
       <AgentRule name="Execution Agents">
@@ -9,13 +9,13 @@
     </Execution>
     <Properties />
   </TestSettings>
-  <Times creation="2017-10-31T10:59:10.0324978+01:00" queuing="2017-10-31T10:59:10.3208768+01:00" start="2017-10-31T10:59:10.3748781+01:00" finish="2017-10-31T10:59:10.7724320+01:00" />
-  <ResultSummary outcome="Failed">
-    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  <Times creation="2017-11-03T11:16:01.3930677+01:00" queuing="2017-11-03T11:16:01.8389179+01:00" start="2017-11-03T11:16:01.9035454+01:00" finish="2017-11-03T11:16:02.3732220+01:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
   </ResultSummary>
   <TestDefinitions>
     <UnitTest name="ShouldReturnTrue" storage="d:\git-hooks-tests\testsolution\unittests\bin\debug\unittests.dll" id="52158601-30c9-e570-a412-78cb1ad55fd7">
-      <Execution id="0161ac4e-df84-490d-8ea1-bd8edf1d4c2c" />
+      <Execution id="50897880-5691-42ea-8e4b-059021ceb043" />
       <TestMethod codeBase="D:/git-hooks-tests/TestSolution/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.ServiceTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ShouldReturnTrue" />
     </UnitTest>
   </TestDefinitions>
@@ -24,18 +24,10 @@
     <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
   </TestLists>
   <TestEntries>
-    <TestEntry testId="52158601-30c9-e570-a412-78cb1ad55fd7" executionId="0161ac4e-df84-490d-8ea1-bd8edf1d4c2c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="52158601-30c9-e570-a412-78cb1ad55fd7" executionId="50897880-5691-42ea-8e4b-059021ceb043" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
   </TestEntries>
   <Results>
-    <UnitTestResult executionId="0161ac4e-df84-490d-8ea1-bd8edf1d4c2c" testId="52158601-30c9-e570-a412-78cb1ad55fd7" testName="ShouldReturnTrue" computerName="P1211GBG" duration="00:00:00.0374115" startTime="2017-10-31T10:59:10.4708870+01:00" endTime="2017-10-31T10:59:10.7408980+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0161ac4e-df84-490d-8ea1-bd8edf1d4c2c">
-      <Output>
-        <ErrorInfo>
-          <Message>Test method UnitTests.ServiceTest.ShouldReturnTrue threw exception: 
-Microsoft.VisualStudio.TestTools.UnitTesting.AssertFailedException: Assert.AreEqual failed. Expected:&lt;True&gt;. Actual:&lt;False&gt;. </Message>
-          <StackTrace>   at UnitTests.ServiceTest.ShouldReturnTrue() in D:\git-hooks-tests\TestSolution\UnitTests\ServiceTest.cs:line 26
-</StackTrace>
-        </ErrorInfo>
-      </Output>
+    <UnitTestResult executionId="50897880-5691-42ea-8e4b-059021ceb043" testId="52158601-30c9-e570-a412-78cb1ad55fd7" testName="ShouldReturnTrue" computerName="P1211GBG" duration="00:00:00.0176783" startTime="2017-11-03T11:16:02.0166896+01:00" endTime="2017-11-03T11:16:02.3412199+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="50897880-5691-42ea-8e4b-059021ceb043">
     </UnitTestResult>
   </Results>
 </TestRun>

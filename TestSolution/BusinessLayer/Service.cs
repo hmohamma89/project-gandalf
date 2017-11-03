@@ -13,12 +13,12 @@ namespace BusinessLayer
     }
     public class Service : IService
     {
-        private readonly bool _flag = true;
+        private readonly string _flag = ConfigurationManager.AppSettings.Get("Flag");
         public bool Counter()
         {
             try
             {
-                return _flag;
+                return Convert.ToBoolean(true);
             }
             catch (Exception)
             {

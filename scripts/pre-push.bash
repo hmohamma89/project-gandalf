@@ -11,7 +11,8 @@ current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
 if [[ $current_branch = $protected_branch ]]; then
 	echo "Runing unit tests"
-    c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 # Command that runs your tests
+    # Command that runs your tests
+    c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "D:\git-hooks-tests" -testFilesToExclude "Unit2Tests" -mstest "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe" 
     RESULT=$?
     echo  "the result is: $RESULT"
     if [ $RESULT -ne 0 ]; then 
