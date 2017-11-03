@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<TestRun id="a40cd78d-a952-41fa-93d2-0b7ba00916a6" name="hamdoon.mohammad@P1211GBG 2017-11-03 11:16:01" runUser="WIPCORE\hamdoon.mohammad" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <TestSettings name="Default Test Settings" id="88a276b8-c90c-4202-946b-4a0e787b6616">
-    <Deployment userDeploymentRoot="D:\git-hooks-tests\scripts" useDefaultDeploymentRoot="false" runDeploymentRoot="hamdoon.mohammad_P1211GBG 2017-11-03 11_16_01" />
+<TestRun id="b72a8eb4-c356-46f7-8eae-c9ef5cabbfb5" name="hamdoon.mohammad@P1211GBG 2017-11-03 11:33:49" runUser="WIPCORE\hamdoon.mohammad" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="44805fc2-0754-46a5-9706-a1679e80e40b">
+    <Deployment userDeploymentRoot="D:\git-hooks-tests" useDefaultDeploymentRoot="false" runDeploymentRoot="hamdoon.mohammad_P1211GBG 2017-11-03 11_33_49" />
     <Execution>
       <TestTypeSpecific />
       <AgentRule name="Execution Agents">
@@ -9,13 +9,13 @@
     </Execution>
     <Properties />
   </TestSettings>
-  <Times creation="2017-11-03T11:16:01.3930677+01:00" queuing="2017-11-03T11:16:01.8389179+01:00" start="2017-11-03T11:16:01.9035454+01:00" finish="2017-11-03T11:16:02.3732220+01:00" />
+  <Times creation="2017-11-03T11:33:49.3335384+01:00" queuing="2017-11-03T11:33:49.7792234+01:00" start="2017-11-03T11:33:49.8402462+01:00" finish="2017-11-03T11:33:50.3522986+01:00" />
   <ResultSummary outcome="Completed">
     <Counters total="1" executed="1" passed="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
   </ResultSummary>
   <TestDefinitions>
     <UnitTest name="ShouldReturnTrue" storage="d:\git-hooks-tests\testsolution\unittests\bin\debug\unittests.dll" id="52158601-30c9-e570-a412-78cb1ad55fd7">
-      <Execution id="50897880-5691-42ea-8e4b-059021ceb043" />
+      <Execution id="751283f0-6288-4c22-b29e-0f16a752445d" />
       <TestMethod codeBase="D:/git-hooks-tests/TestSolution/UnitTests/bin/Debug/UnitTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=15.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnitTests.ServiceTest, UnitTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ShouldReturnTrue" />
     </UnitTest>
   </TestDefinitions>
@@ -24,10 +24,10 @@
     <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
   </TestLists>
   <TestEntries>
-    <TestEntry testId="52158601-30c9-e570-a412-78cb1ad55fd7" executionId="50897880-5691-42ea-8e4b-059021ceb043" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="52158601-30c9-e570-a412-78cb1ad55fd7" executionId="751283f0-6288-4c22-b29e-0f16a752445d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
   </TestEntries>
   <Results>
-    <UnitTestResult executionId="50897880-5691-42ea-8e4b-059021ceb043" testId="52158601-30c9-e570-a412-78cb1ad55fd7" testName="ShouldReturnTrue" computerName="P1211GBG" duration="00:00:00.0176783" startTime="2017-11-03T11:16:02.0166896+01:00" endTime="2017-11-03T11:16:02.3412199+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="50897880-5691-42ea-8e4b-059021ceb043">
+    <UnitTestResult executionId="751283f0-6288-4c22-b29e-0f16a752445d" testId="52158601-30c9-e570-a412-78cb1ad55fd7" testName="ShouldReturnTrue" computerName="P1211GBG" duration="00:00:00.0217101" startTime="2017-11-03T11:33:49.9532549+01:00" endTime="2017-11-03T11:33:50.3122867+01:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="751283f0-6288-4c22-b29e-0f16a752445d">
     </UnitTestResult>
   </Results>
 </TestRun>

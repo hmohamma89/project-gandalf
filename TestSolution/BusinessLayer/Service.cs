@@ -18,7 +18,7 @@ namespace BusinessLayer
         {
             try
             {
-                return Convert.ToBoolean(true);
+                return Convert.ToBoolean(_flag);
             }
             catch (Exception)
             {
