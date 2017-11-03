@@ -1,8 +1,8 @@
 #!/bin/bash 
 
-CMD= "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1" # Command that runs your tests
+CMD= c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 # Command that runs your tests
 
-echo "test script = $CMD" 
+echo $CMD 
 echo "current directory : $PWD"
 
 protected_branch='master'
