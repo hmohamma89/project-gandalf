@@ -1,9 +1,10 @@
 #!/bin/bash 
 
+
 SOLUTIONPATH="D:\git-hooks-tests"
 TESTFILESTOEXCLUDE="Unit2Tests"
 MSTEST="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"
-
+CMD="c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath '$SOLUTIONPATH' -testFilesToExclude '$TESTFILESTOEXCLUDE' -mstest '$MSTEST'"
 protected_branch='master'
 # Check if we actually have commits to push
 commits=`git log @{u}..`
@@ -17,9 +18,12 @@ if [[ $current_branch = $protected_branch ]]; then
     echo "Solutions path: $SOLUTIONPATH"
     echo "Test .dll Files to exclude: $TESTFILESTOEXCLUDE"
     echo "Mstest path: $MSTEST"
+    echo "-----------------------------------------------"
+    echo "cmd to run test: $CMD"
+    echo "-----------------------------------------------"
 	echo "Runing unit tests"
     # Command that runs your tests
-    c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath SOLUTIONPATH -testFilesToExclude TESTFILESTOEXCLUDE -mstest MSTEST
+    $CMD
     RESULT=$?
     echo  "the result is: $RESULT"
     if [ $RESULT -ne 0 ]; then 
