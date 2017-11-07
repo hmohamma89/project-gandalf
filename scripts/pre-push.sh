@@ -15,7 +15,7 @@ current_branch=$(git symbolic-ref HEAD | sed -e 's,.*/\(.*\),\1,')
 
 if [[ $current_branch = $protected_branch ]]; then
     echo "Solutions path: $SOLUTIONPATH"
-    echo "Test Files to exclude: $TESTFILESTOEXCLUDE"
+    echo "Test .dll Files to exclude: $TESTFILESTOEXCLUDE"
     echo "Mstest path: $MSTEST"
 	echo "Runing unit tests"
     # Command that runs your tests
