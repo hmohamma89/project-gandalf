@@ -9,16 +9,18 @@
          ,[Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
          ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe" 
     )
-
+echo $solutionPath
+echo $testFilesToExclude
+echo $mstest
 cls
 $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $testsFiles = @();
 [string[]] $unitTestsFiles=@();
 
-# [string[]] $testFilesToExclude = @("Unit2Tests");
-# [string] $solutionPath="D:\git-hooks-tests";
+# [string[]] $testFilesToExclude = @("Unit2Tests"); # testdlls to exclude
+# [string] $solutionPath="D:\git-hooks-tests"; # name of result file to save test results to
 $resultsFile = 'testresults.txt';
-# [string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe";
+# [string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"; # path to the mstest.exe
 [string] $outCome= "";
 
 function GetTestsDlls()
