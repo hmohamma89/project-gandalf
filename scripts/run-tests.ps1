@@ -4,24 +4,22 @@
     .DESCRIPTION
         Run all tests for a project
     #>
-    # Param(
-    #       [Parameter(Mandatory = $true)][string] $solutionPath # name of result file to save test results to
-    #      ,[Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
-    #      ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe" 
-    # )
-cls
+     Param(
+          [Parameter(Mandatory = $true)][string] $solutionPath # name of result file to save test results to
+         ,[Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
+         ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe" 
+    )
+
+# [string[]] $testFilesToExclude = @("Unit2Tests"); # testdlls to exclude
+# [string] $solutionPath="D:\git-hooks-tests"; # name of result file to save test results to
+# [string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"; # path to the mstest.exe
+
 $scriptDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
 $testsFiles = @();
 [string[]] $unitTestsFiles=@();
-
-[string[]] $testFilesToExclude = @("Unit2Tests"); # testdlls to exclude
-[string] $solutionPath="D:\git-hooks-tests"; # name of result file to save test results to
-$resultsFile = 'testresults.txt';
-[string] $mstest = "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"; # path to the mstest.exe
 [string] $outCome= "";
-echo $solutionPath
-echo $testFilesToExclude
-echo $mstest
+$resultsFile = 'testresults.txt';
+
 function GetTestsDlls()
 {
      $global:testsFiles= $solutionPath |  Get-ChildItem -Filter *Tests.dll -recurse | ? {$_.fullname -match "bin"};  
@@ -63,8 +61,13 @@ function RunTests()
 
 function DeleteTestResultFileIfExist () {
     $resultsFilePath= $solutionPath |  Get-ChildItem -Filter $global:resultsFile -recurse;
-    if(Test-Path $resultsFilePath.FullName){
-        Remove-Item $resultsFilePath.FullName;
+
+    if($resultsFilePath)
+    {
+        if(Test-Path $resultsFilePath.FullName)
+        {
+            Remove-Item $resultsFilePath.FullName;
+        }
     }
 }
 function ParseTestResults()
@@ -99,7 +102,16 @@ function ProcessFileChange()
         GetTestsDlls
         ExcludeNonUnitTests
         RunTests
-        ParseTestResults    
+        ParseTestResults
+
+        if($Global:outCome -eq "Completed"){
+            write-host exit0
+            exit 0
+        }
+        else {
+            write-host exit1
+            exit 1
+        }   
     }
     catch
     {
@@ -111,14 +123,6 @@ function ProcessFileChange()
     finally
     {
         write-host Finally block reached
-        if($Global:outCome -eq "Failed"){
-            write-host exit1
-            exit 1
-        }
-        else {
-            write-host exit0
-            exit 0
-        }
     }
 }
 
