@@ -25,6 +25,7 @@ if [[ $current_branch = $protected_branch ]]; then
 	echo "Runing unit tests"
     # Command that runs your tests
     # eval "$CMD"
+    echo "c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "$SOLUTIONPATH" -testFilesToExclude "$TESTFILESTOEXCLUDE" -mstest "$MSTEST" -testSettingFilePath "$TESTSETTINGFILEPATH""
     c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "$SOLUTIONPATH" -testFilesToExclude "$TESTFILESTOEXCLUDE" -mstest "$MSTEST" -testSettingFilePath "$TESTSETTINGFILEPATH"
     RESULT=$?
     echo  "the result is: $RESULT"

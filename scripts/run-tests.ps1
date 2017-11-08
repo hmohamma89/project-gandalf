@@ -6,7 +6,7 @@
     #>
      Param(
           [Parameter(Mandatory = $true)][string] $solutionPath # name of result file to save test results to
-         ,[Parameter(Mandatory = $true)][string[]] $testFilesToExclude # testdlls to exclude
+         ,[Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
          ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe"
          ,[Parameter(Mandatory = $true)][string] $testSettingFilePath  # path to the testSettingFile, usually lays in ".\*Solution*\TestSettings1.testsettings"  
     )
@@ -34,17 +34,32 @@ function GetTestsDlls()
 }
 function ExcludeNonUnitTests()
 {
-    if($testFilesToExclude -ne $null -and $testFilesToExclude.count -gt 0)
+    $array = $testFilesToExclude.split(",")
+    echo "debugging ExcludeNonUnitTests"
+    echo "----------------------------------------------------------------------------------"
+    if($array -ne $null -and $array.count -gt 0)
     {
-        foreach($testFileToExclude in $testFilesToExclude)
+        $xy=$array.GetType().FullName
+        echo "1/4 testFilesToExclude are $array"
+        $xx=$array.Count
+        echo "1/4 testFilesToExclude.count are $xx"
+        echo "1/4 unitTestsFiles are $global:unitTestsFiles"
+        echo "1/4 testFileToExclude type is $xy" 
+        foreach($item in $array)
         {
+            echo "2/4 test name to exclude  $item"
             foreach($testFile in $global:unitTestsFiles)
             {
-                if([string]$testFile -like "*$testFileToExclude*"){
+                echo "3/4 test file Validate $testFile"
+                if([string]$testFile -like "*$item*"){
+                    echo "4/4 $testFile == $item"
                     $global:unitTestsFiles=$global:unitTestsFiles -ne $testFile;
+                }else{
+                    echo "4/4 $testFile !=  $item"
                 }
             } 
         }
+        echo "----------------------------------------------------------------------------------"
     }   
 }
 
@@ -57,9 +72,9 @@ function RunTests()
     $mstestPath = $f.shortpath;
     foreach($unitTestFile in $global:unitTestsFiles)
     {
-        $temp += "$unitTestFile ";
+        $temp += "/$unitTestFile "
     }  
-    $cmd="'$mstestPath'/$temp /detail:errormessage /nologo /resultsfile:$global:resultsFile /testsettings:$global:testSettingFilePath ";
+    $cmd="'$mstestPath'$temp /detail:errormessage /nologo /resultsfile:$global:resultsFile /testsettings:$global:testSettingFilePath ";
     echo $cmd
     iex "& $cmd";
 }
@@ -104,34 +119,23 @@ function Validate ()
 {
     if([string]::IsNullOrEmpty($solutionPath))
     {
-        echo "In parameter solutionPath:$solutionPath is null or empty"
+        echo "In parameter solutionPath: $solutionPath is null or empty"
     }
 
     if([string]::IsNullOrEmpty($mstest))
     {
-        echo "In parameter mstest:$mstest is null or empty"
+        echo "In parameter mstest: $mstest is null or empty"
     }
 
     if([string]::IsNullOrEmpty($testSettingFilePath))
     {
-        echo "In parameter testSettingFilePath:$testSettingFilePath is null or empty"
+        echo "In parameter testSettingFilePath: $testSettingFilePath is null or empty"
     }
 
-    if($testFilesToExclude -ne $null -and $testFilesToExclude.count -gt 0)
+    if([string]::IsNullOrEmpty($testFilesToExclude))
     {
-        for ($i = 0; $i -lt $testFilesToExclude.Count; $i++) 
-        {
-            [string]$test = $testFilesToExclude[$i];
-            if([string]::IsNullOrEmpty($test))
-            {
-                echo "In parameter testFilesToExclude[$i]:$test is null or empty"
-            }
-        }
-    }
-    else
-    {
-        echo "In parameter testFilesToExclude:$testFilesToExclude is empty"
-    }
+        echo "In parameter testFilesToExclude: $testFilesToExclude is null or empty"
+    }    
 }
 
 function ProcessFileChange()
