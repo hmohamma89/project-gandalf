@@ -55,7 +55,7 @@ function RunTests()
     $mstestPath = $f.shortpath;
     foreach($unitTestFile in $global:unitTestsFiles)
     {
-        $temp += $unitTestFile+" /detail:errormessage /noisolation /resultsfile:$global:resultsFile";
+        $temp += $unitTestFile+" /detail:errormessage /resultsfile:$global:resultsFile";
     }  
     $cmd="'$mstestPath'/$temp";
     iex "& $cmd";
