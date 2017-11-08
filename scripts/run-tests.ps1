@@ -55,7 +55,7 @@ function RunTests()
     $mstestPath = $f.shortpath;
     foreach($unitTestFile in $global:unitTestsFiles)
     {
-        $temp += $unitTestFile+" /detail:errormessage /resultsfile:$global:resultsFile";
+        $temp += $unitTestFile+" /detail:errormessage /testsettings:D:\git-hooks-tests\TestSolution\TestSettings1.testsettings /resultsfile:$global:resultsFile";
     }  
     $cmd="'$mstestPath'/$temp";
     iex "& $cmd";
