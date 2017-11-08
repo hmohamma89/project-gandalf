@@ -2,7 +2,7 @@
     .SYNOPSIS
         .
     .DESCRIPTION
-        Run all tests for a project
+        Run all tests for a solution
     #>
      Param(
           [Parameter(Mandatory = $true)][string] $solutionPath # name of result file to save test results to
@@ -55,8 +55,7 @@ function RunTests()
     $mstestPath = $f.shortpath;
     foreach($unitTestFile in $global:unitTestsFiles)
     {
-        #$temp += $unitTestFile +" /category:'$Global:testCategory' /detail:errormessage /resultsfile:$global:resultsFile";
-        $temp += $unitTestFile+" /detail:errormessage /resultsfile:$global:resultsFile";
+        $temp += $unitTestFile+" /detail:errormessage /noisolation /resultsfile:$global:resultsFile";
     }  
     $cmd="'$mstestPath'/$temp";
     iex "& $cmd";
