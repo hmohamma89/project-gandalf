@@ -6,9 +6,12 @@
     #>
      Param(
           [Parameter(Mandatory = $true)][string] $solutionPath # name of result file to save test results to
-         ,[Parameter(Mandatory = $true)][string] $testFilesToExclude # testdlls to exclude
+         ,[Parameter(Mandatory = $true)][string[]] $testFilesToExclude # testdlls to exclude
          ,[Parameter(Mandatory = $true)][string] $mstest # path to the mstest.exe, usually lays in "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\mstest.exe" 
     )
+
+
+
 
 # [string[]] $testFilesToExclude = @("Unit2Tests"); # testdlls to exclude
 # [string] $solutionPath="D:\git-hooks-tests"; # name of result file to save test results to
@@ -95,10 +98,40 @@ function ParseTestResults()
     Write-Host
 }
 
+function Validate () 
+{
+    if([string]::IsNullOrEmpty($solutionPath))
+    {
+        echo "In parameter solutionPath:$solutionPath is null or empty"
+    }
+
+    if([string]::IsNullOrEmpty($mstest))
+    {
+        echo "In parameter mstest:$mstest is null or empty"
+    }
+
+    if($testFilesToExclude -ne $null -and $testFilesToExclude.count -gt 0)
+    {
+        for ($i = 0; $i -lt $testFilesToExclude.Count; $i++) 
+        {
+            [string]$test = $testFilesToExclude[$i];
+            if([string]::IsNullOrEmpty($test))
+            {
+                echo "In parameter testFilesToExclude[$i]:$test is null or empty"
+            }
+        }
+    }
+    else
+    {
+        echo "In parameter testFilesToExclude:$testFilesToExclude is null or empty"
+    }
+}
+
 function ProcessFileChange()
 {
     try 
     {
+        Validate
         GetTestsDlls
         ExcludeNonUnitTests
         RunTests

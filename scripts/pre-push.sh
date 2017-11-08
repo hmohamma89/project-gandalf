@@ -4,7 +4,7 @@
 SOLUTIONPATH="D:\git-hooks-tests"
 TESTFILESTOEXCLUDE="Unit2Tests"
 MSTEST="C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"
-CMD="c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "\""$SOLUTIONPATH"\"" -testFilesToExclude "\""$TESTFILESTOEXCLUDE"\"" -mstest "\""$MSTEST"\"""
+# CMD="c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File ./scripts/run-tests.ps1 -solutionPath "$SOLUTIONPATH" -testFilesToExclude "$TESTFILESTOEXCLUDE" -mstest "$MSTEST""
 protected_branch='master'
 # Check if we actually have commits to push
 commits=`git log @{u}..`
@@ -23,8 +23,9 @@ if [[ $current_branch = $protected_branch ]]; then
     echo "-----------------------------------------------"
 	echo "Runing unit tests"
     # Command that runs your tests
-    # $CMD
-    c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "D:\git-hooks-tests" -testFilesToExclude "Unit2Tests" -mstest "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"
+    # eval "$CMD"
+    # c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "D:\git-hooks-tests" -testFilesToExclude "Unit2Tests" -mstest "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\MSTest.exe"
+    c:/Windows/System32/WindowsPowerShell/v1.0/powershell.exe -ExecutionPolicy RemoteSigned -File .\\scripts\\run-tests.ps1 -solutionPath "$SOLUTIONPATH" -testFilesToExclude "$TESTFILESTOEXCLUDE" -mstest "$MSTEST"
     RESULT=$?
     echo  "the result is: $RESULT"
     if [ $RESULT -ne 0 ]; then 
