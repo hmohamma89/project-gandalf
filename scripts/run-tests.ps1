@@ -35,31 +35,18 @@ function GetTestsDlls()
 function ExcludeNonUnitTests()
 {
     $array = $testFilesToExclude.split(",")
-    echo "debugging ExcludeNonUnitTests"
-    echo "----------------------------------------------------------------------------------"
     if($array -ne $null -and $array.count -gt 0)
     {
-        $xy=$array.GetType().FullName
-        echo "1/4 testFilesToExclude are $array"
-        $xx=$array.Count
-        echo "1/4 testFilesToExclude.count are $xx"
-        echo "1/4 unitTestsFiles are $global:unitTestsFiles"
-        echo "1/4 testFileToExclude type is $xy" 
         foreach($item in $array)
         {
-            echo "2/4 test name to exclude  $item"
             foreach($testFile in $global:unitTestsFiles)
             {
-                echo "3/4 test file Validate $testFile"
-                if([string]$testFile -like "*$item*"){
-                    echo "4/4 $testFile == $item"
+                if([string]$testFile -like "*$item*")
+                {
                     $global:unitTestsFiles=$global:unitTestsFiles -ne $testFile;
-                }else{
-                    echo "4/4 $testFile !=  $item"
-                }
-            } 
+                } 
+            }
         }
-        echo "----------------------------------------------------------------------------------"
     }   
 }
 
@@ -75,7 +62,6 @@ function RunTests()
         $temp += "/$unitTestFile "
     }  
     $cmd="'$mstestPath'$temp /detail:errormessage /nologo /resultsfile:$global:resultsFile /testsettings:$global:testSettingFilePath ";
-    echo $cmd
     iex "& $cmd";
 }
 
@@ -149,11 +135,11 @@ function ProcessFileChange()
         ParseTestResults
 
         if($Global:outCome -eq "Completed"){
-            write-host exit0
+            echo "Gandalf Approves, see you next time!"
             exit 0
         }
         else {
-            write-host exit1
+            echo "You Shall Not Pass!!!"
             exit 1
         }   
     }
