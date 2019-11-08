@@ -154,4 +154,4 @@ Your unit tests are failing please fix them before you push to your git reposito
 
 ## Authors
 
-* **Hamdoon Mohammad** - *System Developer* - hamdoon.mohammad@wipcore.se
+* **Hamdoon Mohammad** - *Creator* 
